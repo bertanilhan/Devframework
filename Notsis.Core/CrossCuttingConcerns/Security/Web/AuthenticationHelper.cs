@@ -21,8 +21,7 @@ namespace Notsis.Core.CrossCuttingConcerns.Security.Web
            // var context = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
 
            //var builder = new CookieBuilder();
-           // //var x = builder.Domain => datamız
-
+           //var x = builder.Domain => datamız
             return null;
         }
     }

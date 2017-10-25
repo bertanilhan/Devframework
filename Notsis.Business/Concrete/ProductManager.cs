@@ -27,7 +27,7 @@ namespace Notsis.Business.Concrete
         }
 
         [LogInterceptionAspect(typeof(FileLogger))]
-        //[SecurityOperationInterceptorAspect("Product.Read")]
+        [SecurityOperationInterceptorAspect("Product.Read")]
         //[CacheAspect(typeof(MemoryCacheManager), 1)]
         //[PerformanceInterceptionAspect(0)]
         //[CacheInterceptionAspect(typeof(MemoryCacheManager))]     

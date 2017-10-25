@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Threading;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notsis.Business.Abstract;
 using Notsis.Core.CrossCuttingConcerns.Security;
@@ -21,7 +21,7 @@ namespace Notsis.NetCoreMvcUi.Controller
             _productService = productService;
             _provider = provider;
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View(new ProductListViewModel
@@ -49,7 +49,7 @@ namespace Notsis.NetCoreMvcUi.Controller
                 Roles = new []{"Admin"}
             };
 
-            
+
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.AuthorizationDecision,"Product.Read"),
@@ -57,7 +57,7 @@ namespace Notsis.NetCoreMvcUi.Controller
                 new Claim(ClaimTypes.AuthorizationDecision,"Category.Read"),
                 new Claim(ClaimTypes.Role,"Admin")
             };
-
+            
 
             var claimsIdentity = new ClaimsIdentity(userIdentity);
 
@@ -69,13 +69,14 @@ namespace Notsis.NetCoreMvcUi.Controller
                 claimsIdentity,
                 claimsIdentity2
             });
-
+            
 
             //CookieAuthenticationDefaults.AuthenticationScheme şeması HttpContext.User'ın default data çektiği cookiedir.
             HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
 
-            Thread.CurrentPrincipal = claimsPrincipal;
 
+            //Thread safe olmadığı için kayboluyor.
+            //Thread.CurrentPrincipal = claimsPrincipal;
 
             return Content("Singed");
         }
