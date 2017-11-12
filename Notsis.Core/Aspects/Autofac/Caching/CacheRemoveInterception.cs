@@ -9,17 +9,17 @@ using Notsis.Core.Utilities.IoC;
 
 namespace Notsis.Core.Aspects.Autofac.Caching
 {
-    public class CacheRemoveInterceptionAspect:MethodInterception
+    public class CacheRemoveInterception:MethodInterception
     {
         private readonly string _pattern;
         private readonly ICacheManager _cacheManager;
-        public CacheRemoveInterceptionAspect(string pattern)
+        public CacheRemoveInterception(string pattern)
         {
             _pattern = pattern;
             _cacheManager = ServiceTool.ServiceProvider.GetService<ICacheManager>();
         }
 
-        public CacheRemoveInterceptionAspect(string pattern, Type cacheManagerType)
+        public CacheRemoveInterception(string pattern, Type cacheManagerType)
         {
             _pattern = pattern;
             _cacheManager = (ICacheManager)ServiceTool.ServiceProvider.GetService(cacheManagerType);

@@ -7,8 +7,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\Notsis.DataAccess\Notsis.DataAccess.csproj" />
     <ProjectReference Include="..\Notsis.Entities\Notsis.Entities.csproj" />

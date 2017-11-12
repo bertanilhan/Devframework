@@ -7,11 +7,11 @@ using Notsis.Core.Utilities.Interceptors;
 
 namespace Notsis.Core.Aspects.Autofac.Validation
 {
-    public class ValidationInterceptionAspect:MethodInterception
+    public class ValidationInterception:MethodInterception
     {
         private readonly Type _validationType;
 
-        public ValidationInterceptionAspect(Type validatortype)
+        public ValidationInterception(Type validatortype)
         {
             if (!typeof(IValidator).IsAssignableFrom(validatortype))
             {

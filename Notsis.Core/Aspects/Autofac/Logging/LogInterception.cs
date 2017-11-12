@@ -4,21 +4,22 @@ using System.Linq;
 using System.Text;
 using Castle.DynamicProxy;
 using Notsis.Core.CrossCuttingConcerns.Logging;
+using Notsis.Core.CrossCuttingConcerns.Logging.Log4Net;
 using Notsis.Core.Utilities.Interceptors;
 
 namespace Notsis.Core.Aspects.Autofac.Logging
 {
-    public class LogInterceptionAspect:MethodInterception
+    public class LogInterception:MethodInterception
     {
-        private readonly LoggerService _loggerService;
+        private readonly ILoggerService _loggerService;
 
-        public LogInterceptionAspect(Type loggerType)
+        public LogInterception(Type loggerType)
         {
-            if (loggerType.BaseType != typeof(LoggerService))
+            if (!typeof(ILoggerService).IsAssignableFrom(loggerType))
             {
                 throw new Exception("Wrong Logger Type");
             }
-            _loggerService = (LoggerService)Activator.CreateInstance(loggerType);
+            _loggerService = (ILoggerService)Activator.CreateInstance(loggerType);
         }
 
         protected override void OnBefore(IInvocation invocation)

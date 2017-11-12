@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Security.Claims;
-using System.Security.Principal;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Notsis.Business.DependencyResolvers.Autofac;
-using Notsis.Core.CrossCuttingConcerns.Security;
 using Notsis.Core.DependencyResolvers;
 using Notsis.Core.Extensions;
 using Notsis.Core.Utilities.IoC;
@@ -24,6 +20,9 @@ namespace Notsis.NetCoreMvcUi
 
             services.AddLog4Net();
 
+            services.AddNlog();
+
+
             services.AddAuthentication(options =>
                 {
                     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -32,7 +31,6 @@ namespace Notsis.NetCoreMvcUi
                 })
                 .AddCookie();
 
-            services.AddTransient<ClaimsPrincipal>(x=> x.GetService<IHttpContextAccessor>().HttpContext.User);
 
             services.AddDependencyResolvers(new IModule[]
                 {
@@ -49,7 +47,6 @@ namespace Notsis.NetCoreMvcUi
 
             return services.CreateAutofacServiceProvider();
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

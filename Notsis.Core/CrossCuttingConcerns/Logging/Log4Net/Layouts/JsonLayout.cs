@@ -14,10 +14,10 @@ namespace Notsis.Core.CrossCuttingConcerns.Logging.Log4Net.Layouts
 
         public override void Format(TextWriter writer, LoggingEvent loggingEvent)
         {
-            var logEvent = new SerializableLogEvent(loggingEvent);
+            var logEvent = new Log4NetSerializableLogEvent(loggingEvent);
 
             var json = JsonConvert.SerializeObject(logEvent, Formatting.Indented);
-
+            
             writer.WriteLine(json);
         }
     }

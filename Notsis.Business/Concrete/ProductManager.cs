@@ -4,9 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using Notsis.Business.Abstract;
-using Notsis.Business.BusinessAspects.Security;
 using Notsis.Core.Aspects.Autofac.Logging;
 using Notsis.Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
+using Notsis.Core.CrossCuttingConcerns.Logging.NLog.Loggers;
 using Notsis.DataAccess.Abstract;
 using Notsis.Entities.Concrete;
 
@@ -26,11 +26,13 @@ namespace Notsis.Business.Concrete
             return _productDal.Get(filter);
         }
 
-        [LogInterceptionAspect(typeof(FileLogger))]
-        [SecurityOperationInterceptorAspect("Product.Read")]
+        [LogInterception(typeof(NLogFileLogger))]
+        [LogInterception(typeof(Log4NetFileLogger))]
+        //[LogInterceptionAspect(typeof(Log4NetFileLogger))]
+        //[SecurityOperationInterceptor("Product.Read")]
         //[CacheAspect(typeof(MemoryCacheManager), 1)]
-        //[PerformanceInterceptionAspect(0)]
-        //[CacheInterceptionAspect(typeof(MemoryCacheManager))]     
+        //[PerformanceInterception(0)]
+        //[CacheInterception(typeof(MemoryCacheManager))]     
         public List<Product> GetList(Expression<Func<Product, bool>> filter = null)
         {
             Thread.Sleep(3000);

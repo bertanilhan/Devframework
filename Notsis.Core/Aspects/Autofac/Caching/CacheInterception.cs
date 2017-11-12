@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.DynamicProxy;
@@ -9,12 +11,12 @@ using Notsis.Core.Utilities.IoC;
 
 namespace Notsis.Core.Aspects.Autofac.Caching
 {
-    public class CacheInterceptionAspect:MethodInterception
+    public class CacheInterception:MethodInterception
     {
         private readonly int _duration;
         private readonly ICacheManager _cacheManager;
 
-        public CacheInterceptionAspect(Type cacheType, int duration = 60)
+        public CacheInterception(Type cacheType, int duration = 60)
         {
             if (!typeof(ICacheManager).IsAssignableFrom(cacheType))
             {

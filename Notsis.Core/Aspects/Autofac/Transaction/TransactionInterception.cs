@@ -7,7 +7,7 @@ using Notsis.Core.Utilities.Interceptors;
 
 namespace Notsis.Core.Aspects.Autofac.Transaction
 {
-    public class TransactionInterceptionAspect:MethodInterception
+    public class TransactionInterception:MethodInterception
     {
         public override void Intercept(IInvocation invocation)
         {

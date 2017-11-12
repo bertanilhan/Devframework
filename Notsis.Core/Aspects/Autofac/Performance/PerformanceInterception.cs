@@ -10,11 +10,11 @@ using Notsis.Core.Utilities.IoC;
 
 namespace Notsis.Core.Aspects.Autofac.Performance
 {
-    public class PerformanceInterceptionAspect:MethodInterception
+    public class PerformanceInterception:MethodInterception
     {
         private readonly int _interval;
         private readonly Stopwatch _stopwatch;
-        public PerformanceInterceptionAspect(int interval)
+        public PerformanceInterception(int interval)
         {
             _interval = interval;
             _stopwatch = ServiceTool.ServiceProvider.GetService<Stopwatch>();

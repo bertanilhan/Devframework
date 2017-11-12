@@ -21,7 +21,7 @@ namespace Notsis.NetCoreMvcUi.Controller
             _productService = productService;
             _provider = provider;
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View(new ProductListViewModel
